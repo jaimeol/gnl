@@ -6,4 +6,7 @@ In the get_next_line project at 42, we are tasked with writing a C function call
 
 
 ## Normal and Bonus
-Then standard project is the one described above. The objective of the bonus part is to use only one static var (should be the buffer 😉) and to manage various file descriptors at the same time. 
+Then mandatory is the one described above. The objective of the bonus part is to use only one static var (should be the buffer 😉) and to manage various file descriptors at the same time.
+
+## Norm
+You must the follow the norm 👉 [NORM](https://elearning.intra.42.fr/notions/the-norm/subnotions/norm-v4/pdfs/Norm%20V4)
