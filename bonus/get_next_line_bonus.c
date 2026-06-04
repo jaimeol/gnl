@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolivare <jolivare@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaime <jaime@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 16:47:15 by jolivare          #+#    #+#             */
-/*   Updated: 2024/01/02 18:54:18 by jolivare         ###   ########.fr       */
+/*   Updated: 2026/06/04 12:46:56 by jaime            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+#include <stdio.h>
+#include <fcntl.h>
 
 char	*ft_free(char *buffer, char *buf)
 {
@@ -111,4 +113,50 @@ char	*get_next_line(int fd)
 	line = ft_line(buffer[fd]);
 	buffer[fd] = ft_next(buffer[fd]);
 	return (line);
+}
+
+int main(void) {
+	char *line1;
+	char *line2;
+	char *line3;
+	
+	int fd1 = open("file1.txt", O_RDONLY);
+	int fd2 = open("file2.txt", O_RDONLY);
+	int fd3 = open("file3.txt", O_RDONLY);
+
+	if (fd1 < 0 || fd2 < 0 || fd3 < 0) {
+		printf("Couldnt open test files.\n");
+		return (1);
+	}
+	while (1) {
+		line1 = get_next_line(fd1);
+		line2 = get_next_line(fd2);
+		line3 = get_next_line(fd3);
+		
+		if (!line1 && !line2 && !line3) {
+			printf("End of all files\n");
+			break;
+		}
+
+		if (line1) {
+			printf("[FD:%d] -> %s", fd1, line1);
+			free(line1);
+		}
+
+		if (line2) {
+			printf("[FD:%d] -> %s", fd2, line2);
+			free(line2);
+		}
+
+		if (line3) {
+			printf("[FD:%d] -> %s", fd3, line3);
+			free(line3);
+		}
+	}
+
+	close(fd1);
+	close(fd2);
+	close(fd3);
+
+	return (0);
 }
